@@ -86,3 +86,8 @@ footer {
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap; }
+
+@media only screen and (max-width: 580px) {
+  h1 {
+    font-size: 1.5em;
+    padding-top: 2em; } }
