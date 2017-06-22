@@ -1,0 +1,58 @@
+<!--
+FRONT-END DEVELOPMENT NANODEGREE
+FINAL PROJECT - NEIGHBORHOOD APP
+AUTHORED BY JAIME PABON
+JUNE 2017
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="styles/css/main.css">
+  	<title>Neighborhood App</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" id="header-row">
+        <div class="col-md-12">
+          <h1>Jumeirah Lakes Towers, Dubai</h1>
+        </div>
+      </div>
+      <div class="row" id="content-row">
+        <div class="col-md-2" id="locations-col">
+          <select data-bind="options: locationsList,
+                             optionsText: 'title',
+                             value: selectedLocation,
+                             optionsCaption: 'Choose a location...',
+                             event : {change: clickOnDropdown}"></select>
+          <ul data-bind="foreach: locationsList">
+            <li data-bind="text: title, visible: display, click: clickOnList"></li>
+          </ul>
+        </div>
+        <div class="col-md-7" id="map-col">
+          <div id="map"></div>
+        </div>
+        <div class="col-md-3" id="photos-col">
+          <h3>Photos by FourSquare</h3>
+          <div id="location-photos" data-bind="foreach: locationPhotos">
+            <img data-bind="attr: {src: $data}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   	<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEXENqmCO00XAAr9XxZkBl_ujWnb5BOSU&v=3&callback=initMap">
+   	</script>	
+    <script src="js/lib/knockout-3.4.2.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+  <footer>
+    © 2017 Jaime Pabon
+  </footer>
+</html>
