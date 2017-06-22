@@ -29,12 +29,7 @@ var initMap = function() {
 			animation: google.maps.Animation.DROP,
 			id: i
 		});
-		
-		marker.addListener('click', function() {
-			populateInfoWindow(this, infoWindow);
-
-		});
-
+		marker.addListener('click', populateInfoWindow.bind(this, infoWindow));
 		markers.push(marker);
 	}
 };
@@ -81,8 +76,8 @@ var displayMarkerDropdownSelection = function(location) {
       }
     }
   } else {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
+    for (var iii = 0; iii < markers.length; iii++) {
+      markers[iii].setMap(map);
     }
 
   }

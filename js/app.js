@@ -32,14 +32,13 @@ var ViewModel = function() {
 		var fsClientSecret = 'EOEL5XG2SRLOCKW5BMXAATIIDZSAKKWITST2TGGSFXKALSSN';
 		var fsPhotoSize = 'width300';
 		var fsNumPhotos = 3;
+		var fsApiCall;
 
 		// FourSqure API call.
 		if (item === undefined) {
-			var fsApiCall = 'https://api.foursquare.com/v2/venues/' + self.selectedLocation().venueId + '/photos?limit=' + fsNumPhotos 
-						+ '&client_id=' + fsClientId + '&client_secret=' + fsClientSecret + '&v=20170601';
+			fsApiCall = 'https://api.foursquare.com/v2/venues/' + self.selectedLocation().venueId + '/photos?limit=' + fsNumPhotos + '&client_id=' + fsClientId + '&client_secret=' + fsClientSecret + '&v=20170601';
 		} else {
-			var fsApiCall = 'https://api.foursquare.com/v2/venues/' + item.venueId + '/photos?limit=' + fsNumPhotos 
-						+ '&client_id=' + fsClientId + '&client_secret=' + fsClientSecret + '&v=20170601';
+			fsApiCall = 'https://api.foursquare.com/v2/venues/' + item.venueId + '/photos?limit=' + fsNumPhotos + '&client_id=' + fsClientId + '&client_secret=' + fsClientSecret + '&v=20170601';
 		}
 		$.ajax({
 			url: fsApiCall,
@@ -47,8 +46,7 @@ var ViewModel = function() {
 			success: function(fsApiResponse) {
 				self.locationPhotos().length = 0;
 				for (var i = 0; i < fsApiResponse.response.photos.count; i++) {
-					self.locationPhotos.push(fsApiResponse.response.photos.items[i].prefix + fsPhotoSize 
-						+ fsApiResponse.response.photos.items[i].suffix);	
+					self.locationPhotos.push(fsApiResponse.response.photos.items[i].prefix + fsPhotoSize + fsApiResponse.response.photos.items[i].suffix);	
 				}
 			},
 			error: function() {
@@ -73,11 +71,11 @@ var ViewModel = function() {
 
 		// Hides all locations that were not selected.
 		} else {
-			for (var i = 0; i < self.locationsList().length; i++) {
-				if (self.locationsList()[i].title != self.selectedLocation().title) {
-					self.locationsList()[i].display(false);
+			for (var ii = 0; ii < self.locationsList().length; ii++) {
+				if (self.locationsList()[ii].title != self.selectedLocation().title) {
+					self.locationsList()[ii].display(false);
 				} else {
-					self.locationsList()[i].display(true);
+					self.locationsList()[ii].display(true);
 				}
 			}
 			self.displayLocationPhotos(item);
