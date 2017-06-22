@@ -1,5 +1,11 @@
 // Google Maps functionality
 
+setTimeout(function() {
+  if(!window.google || !window.google.maps) {
+    $("#map-col").prepend("<h3 id='error'>Oops! Something went wrong loading Google Maps.  Please reload the page.</h3>");
+  }
+}, 5000);
+
 var markers = [];
 var map;
 

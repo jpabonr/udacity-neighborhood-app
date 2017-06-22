@@ -39,6 +39,10 @@ h1 {
 h3 {
   color: #C7C7C7; }
 
+#error {
+  color: #FF6161;
+  text-align: center; }
+
 ul {
   font-size: 1em;
   padding-left: 0; }
