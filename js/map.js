@@ -20,6 +20,7 @@ var initMap = function() {
   infoWindow = new google.maps.InfoWindow();
 
 	for (var i = 0; i < initialLocations.length; i++) {
+    /* jshint loopfunc: true */
 		var position = initialLocations[i].coord;
 		var title = initialLocations[i].title;
 		var marker = new google.maps.Marker({
@@ -29,20 +30,24 @@ var initMap = function() {
 			animation: google.maps.Animation.DROP,
 			id: i
 		});
-		marker.addListener('click', populateInfoWindow.bind(this, infoWindow));
+		
+		marker.addListener('click', function() {
+		  populateInfoWindow(this, infoWindow);
+		});
+
 		markers.push(marker);
 	}
 };
 
 var populateInfoWindow = function (marker, infoWindow) {
-    if (infoWindow.marker != marker) {
-      infoWindow.setContent('<div>' + marker.title + '</div>');
-      infoWindow.open(map, marker);
-      infoWindow.addListener('closeclick', function() {
-        infoWindow.close();
-      });
-    }
-  };
+  if (infoWindow.marker != marker) {
+    infoWindow.setContent('<div>' + marker.title + '</div>');
+    infoWindow.open(map, marker);
+    infoWindow.addListener('closeclick', function() {
+      infoWindow.close();
+    });
+  }
+};
 
 var displayInfoWindow = function(location) {
   var selectedLocation = location;
