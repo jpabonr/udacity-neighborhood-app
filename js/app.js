@@ -53,7 +53,7 @@ var ViewModel = function() {
 			},
 			error: function() {
 				self.locationPhotos().length = 0;
-				self.locationPhotos.push('/img/error.jpg');
+				self.locationPhotos.push('img/error.jpg');
 			}
 		});
 	};
@@ -66,7 +66,7 @@ var ViewModel = function() {
 			for (var i = 0; i < self.locationsList().length; i++) {
 				self.locationsList()[i].display(true);
 				self.locationPhotos().length = 0;
-				self.locationPhotos.push('/img/photo_placeholder.jpg');
+				self.locationPhotos.push('img/photo_placeholder.jpg');
 			}
 
 			infoWindow.close();
