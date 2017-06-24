@@ -1,11 +1,5 @@
 // Google Maps functionality
 
-setTimeout(function() {
-  if(!window.google || !window.google.maps) {
-    $("#map-col").prepend("<h3 id='error'>Oops! Something went wrong loading Google Maps.  Please reload the page.</h3>");
-  }
-}, 5000);
-
 var markers = [];
 var map;
 
@@ -32,7 +26,11 @@ var initMap = function() {
 		});
 		
 		marker.addListener('click', function() {
-		  populateInfoWindow(this, infoWindow);
+      thisMarker = this;
+		  populateInfoWindow(thisMarker, infoWindow);
+      displayLocationPhotos(thisMarker);
+      thisMarker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){ thisMarker.setAnimation(null); }, 750);
 		});
 
 		markers.push(marker);
@@ -40,7 +38,7 @@ var initMap = function() {
 };
 
 var populateInfoWindow = function (marker, infoWindow) {
-  if (infoWindow.marker != marker) {
+  if (infoWindow.marker !== marker) {
     infoWindow.setContent('<div>' + marker.title + '</div>');
     infoWindow.open(map, marker);
     infoWindow.addListener('closeclick', function() {
@@ -50,17 +48,16 @@ var populateInfoWindow = function (marker, infoWindow) {
 };
 
 var displayInfoWindow = function(location) {
-  var selectedLocation = location;
+  // var selectedLocation = location; // DEBUGGING
   for (var i = 0; i < markers.length; i++) {
-    if (markers[i].title == selectedLocation.title) {
-      markers[i].setMap(map);
-      markers[i].setAnimation(google.maps.Animation.DROP);
-      if (infoWindow.marker != markers[i]) {
-      infoWindow.setContent('<div>' + markers[i].title + '</div>');
-      infoWindow.open(map, markers[i]);
+    if (markers[i].title === location.title) {
+      thisMarker = markers[i];
+      thisMarker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){ thisMarker.setAnimation(null); }, 750);
+      if (infoWindow.marker !== markers[i]) {
+        infoWindow.setContent('<div>' + markers[i].title + '</div>');
+        infoWindow.open(map, markers[i]);
       }
-    } else {
-      markers[i].setMap(null);
     }
   }
 };
@@ -70,19 +67,21 @@ var displayMarkerDropdownSelection = function(location) {
   if (location !== undefined) {
     for (var i = 0; i < markers.length; i++) {
       if (markers[i].title == location.title) {
-        markers[i].setMap(map);
-        markers[i].setAnimation(google.maps.Animation.DROP);   
-        if (infoWindow.marker != markers[i]) {
+        thisMarker = markers[i];
+        thisMarker.setVisible(true);
+        thisMarker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function(){ thisMarker.setAnimation(null); }, 750);
+        if (infoWindow.marker !== markers[i]) {
           infoWindow.setContent('<div>' + markers[i].title + '</div>');
           infoWindow.open(map, markers[i]);     
-          }
+        }
       } else {
-        markers[i].setMap(null);
+        markers[i].setVisible(false);
       }
     }
   } else {
     for (var iii = 0; iii < markers.length; iii++) {
-      markers[iii].setMap(map);
+      markers[iii].setVisible(true);
     }
 
   }

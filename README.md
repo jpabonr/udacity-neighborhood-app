@@ -5,8 +5,10 @@ This web app allows users to check out a few places in my neighborhood (Jumeirah
 
 ## **Getting Started**
 
-1. Go to https://jpabonr.github.io/udacity-neighborhood-app/
-2. Click any place on the list to see its location on the map as well as a few photos from FourSquare.
-3. Alternatively, you can also select a place using the drop-down menu.
+1. Go to the GitHub repo https://github.com/jpabonr/udacity-neighborhood-app
+2. Click the 'Clone or Download' button and download the ZIP file
+3. Find the ZIP file in your local drive and unzip it
+4. Open the HTML file with your favorite browser
+5. Start using the web app!
 
-Enjoy!
+Alternatively, you can find the web app here: https://jpabonr.github.io/udacity-neighborhood-app/

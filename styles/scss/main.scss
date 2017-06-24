@@ -43,12 +43,13 @@ h1 {
     font-size: 2.5em;
 }
 
-h3 {
-	color: #C7C7C7;
-}
 
-#error {
-	color: #FF6161;
+#googleMapsError {
+	font-size: 18px;
+	font-weight: bold;
+	color: #FF6767;
+	display: inline-block;
+	width: 100%;
 	text-align: center;
 }
 
