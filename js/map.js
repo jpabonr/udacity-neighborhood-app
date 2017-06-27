@@ -26,7 +26,7 @@ var initMap = function() {
 		});
 		
 		marker.addListener('click', function() {
-      thisMarker = this;
+      var thisMarker = this;
 		  populateInfoWindow(thisMarker, infoWindow);
       displayLocationPhotos(thisMarker);
       thisMarker.setAnimation(google.maps.Animation.BOUNCE);
@@ -48,12 +48,14 @@ var populateInfoWindow = function (marker, infoWindow) {
 };
 
 var displayInfoWindow = function(location) {
-  // var selectedLocation = location; // DEBUGGING
+  function stopBounce(i) {
+    markers[i].setAnimation(null);
+  }
+
   for (var i = 0; i < markers.length; i++) {
     if (markers[i].title === location.title) {
-      thisMarker = markers[i];
-      thisMarker.setAnimation(google.maps.Animation.BOUNCE);
-      setTimeout(function(){ thisMarker.setAnimation(null); }, 750);
+      markers[i].setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(stopBounce, 750, i);
       if (infoWindow.marker !== markers[i]) {
         infoWindow.setContent('<div>' + markers[i].title + '</div>');
         infoWindow.open(map, markers[i]);
@@ -64,13 +66,16 @@ var displayInfoWindow = function(location) {
 
 // Displays in the map the marker of the location selected in the drop-down.
 var displayMarkerDropdownSelection = function(location) {
+  function stopBounce(i) {
+    markers[i].setAnimation(null);
+  }
+
   if (location !== undefined) {
     for (var i = 0; i < markers.length; i++) {
       if (markers[i].title == location.title) {
-        thisMarker = markers[i];
-        thisMarker.setVisible(true);
-        thisMarker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function(){ thisMarker.setAnimation(null); }, 750);
+        markers[i].setVisible(true);
+        markers[i].setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(stopBounce, 750, i);
         if (infoWindow.marker !== markers[i]) {
           infoWindow.setContent('<div>' + markers[i].title + '</div>');
           infoWindow.open(map, markers[i]);     
@@ -80,8 +85,8 @@ var displayMarkerDropdownSelection = function(location) {
       }
     }
   } else {
-    for (var iii = 0; iii < markers.length; iii++) {
-      markers[iii].setVisible(true);
+    for (var k = 0; k < markers.length; k++) {
+      markers[k].setVisible(true);
     }
 
   }

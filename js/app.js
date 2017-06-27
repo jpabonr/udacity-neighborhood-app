@@ -8,7 +8,7 @@ var ViewModel = function() {
 
 	// Handles Google Maps API errors.
 	this.googleMapsFailure = function(){
-		self.googleMapsErrorMessage("<span id='googleMapsError'>Oops! Something went wrong loading Google Maps.  Please reload the page.</span>")
+		self.googleMapsErrorMessage("<span id='googleMapsError'>Oops! Something went wrong loading Google Maps.  Please reload the page.</span>");
 	};
 
 	// Creates an array of locations.
